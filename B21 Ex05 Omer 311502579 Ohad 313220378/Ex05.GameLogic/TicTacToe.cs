@@ -32,7 +32,7 @@ namespace B21_Ex02
             GameLogic.eGameState currentState = GameLogic.eGameState.Continue;
             while (!gameOver)
             {
-                Ex02.ConsoleUtils.Screen.Clear();
+                //Ex02.ConsoleUtils.Screen.Clear();
                 UI.ShowTurn(m_CurrentPlayer);
                 m_Board.PrintBoard();
 

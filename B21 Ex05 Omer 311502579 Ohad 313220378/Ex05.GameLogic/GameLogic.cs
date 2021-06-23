@@ -8,6 +8,7 @@ namespace B21_Ex02
     public static class GameLogic
     {
         public const int k_NumCellsForFastCalculation = 9;
+        public static Random s_Randomizer = new Random();
 
         // enum for holding the possible states of the game
         public enum eGameState
@@ -162,17 +163,16 @@ namespace B21_Ex02
             int xCoordSave = 0;
             int yCoordSave = 0;
             eGameState currentState = eGameState.Continue;
-            UI.ShowAIMsg();
-            Thread.Sleep(1200);
+            //UI.ShowAIMsg();
+            //Thread.Sleep(1200);
 
             /*  According to our checks as long as there are more than 9 empty cells, we can't properly calculate a good AI move in a decent time.
                 So, if there are more than 9 empty cells we go with a semi-random play - get random board indices but those that won't lead
                 to a loss. If checked in debugging mode, may take longer*/
             if (i_Board.NumberOfEmptyCells > k_NumCellsForFastCalculation)
             {
-                Random random = new Random();
-                int randomRow = random.Next(1, i_Board.Size + 1) - 1;
-                int randomCol = random.Next(1, i_Board.Size + 1) - 1;
+                int randomRow = s_Randomizer.Next(1, i_Board.Size + 1) - 1;
+                int randomCol = s_Randomizer.Next(1, i_Board.Size + 1) - 1;
                 bool gameOver = IsGameOver(i_Board, new Point(randomRow + 1, randomCol + 1), (char)i_Symbol).Equals(eGameState.Lose);
 
                 // The AI chooses a move that is legal and doesn't lead to a loss
@@ -184,8 +184,8 @@ namespace B21_Ex02
                         i_Board.ClearSquare(randomRow, randomCol);
                     }
 
-                    randomRow = random.Next(1, i_Board.Size + 1) - 1;
-                    randomCol = random.Next(1, i_Board.Size + 1) - 1;
+                    randomRow = s_Randomizer.Next(1, i_Board.Size + 1) - 1;
+                    randomCol = s_Randomizer.Next(1, i_Board.Size + 1) - 1;
                 }
 
                 xCoordSave = randomRow + 1;
@@ -209,11 +209,12 @@ namespace B21_Ex02
                                         new Point(xCoordSave, yCoordSave),
                                         'O');
             io_GameOver = !io_CurrentState.Equals(eGameState.Continue);
-            Ex02.ConsoleUtils.Screen.Clear();
+
+            //Ex02.ConsoleUtils.Screen.Clear(); ---> clear forms screen
             i_Board.PrintBoard();
         }
 
-        private static int getMoveFromAIRecursion(ref eGameState io_CurrentState, TicTacToe.ePlayerSign i_Symbol, Board i_Board, ref int iSave, ref int jSave)
+        private static int getMoveFromAIRecursion(ref eGameState io_CurrentState, TicTacToe.ePlayerSign i_Symbol, Board i_Board, ref int io_ISave, ref int io_JSave)
         {
             int recursionResult = 0;
 
@@ -239,33 +240,62 @@ namespace B21_Ex02
             }
             else
             {
-                int maxWins = -2;
-                for (int i = 0; i < i_Board.Size; i++)
-                {
-                    for (int j = 0; j < i_Board.Size; j++)
-                    {
-                        if (!i_Board.AddMove(i, j, (char)i_Symbol))
-                        {
-                            continue;
-                        }
+                //int maxWins = -2;
+                //for (int i = 0; i < i_Board.Size; i++)
+                //{
+                //    for (int j = 0; j < i_Board.Size; j++)
+                //    {
+                //        if (!i_Board.AddMove(i, j, (char)i_Symbol))
+                //        {
+                //            continue;
+                //        }
 
-                        io_CurrentState = IsGameOver(i_Board, new Point(i + 1, j + 1), (char)i_Symbol);
-                        TicTacToe.ePlayerSign oppositeSymbol = i_Symbol == TicTacToe.ePlayerSign.One ?
-                                                                TicTacToe.ePlayerSign.Two : TicTacToe.ePlayerSign.One;
-                        int wins = getMoveFromAIRecursion(ref io_CurrentState, oppositeSymbol, i_Board, ref iSave, ref jSave);
-                        i_Board.ClearSquare(i, j);
-                        recursionResult += wins;
-                        if (maxWins < wins)
-                        {
-                            iSave = i;
-                            jSave = j;
-                            maxWins = wins;
-                        }
+                //        io_CurrentState = IsGameOver(i_Board, new Point(i + 1, j + 1), (char)i_Symbol);
+                //        TicTacToe.ePlayerSign oppositeSymbol = i_Symbol == TicTacToe.ePlayerSign.One ?
+                //                                                TicTacToe.ePlayerSign.Two : TicTacToe.ePlayerSign.One;
+                //        int wins = getMoveFromAIRecursion(ref io_CurrentState, oppositeSymbol, i_Board, ref io_ISave, ref io_JSave);
+                //        i_Board.ClearSquare(i, j);
+                //        recursionResult += wins;
+                //        if (maxWins < wins)
+                //        {
+                //            io_ISave = i; // row
+                //            io_JSave = j; // column
+                //            maxWins = wins;
+                //        }
+                //    }
+                getMoveFromAIRecursionHelper(ref io_CurrentState, i_Symbol, i_Board, ref io_ISave, ref io_JSave, ref recursionResult);
+            }
+            
+
+            return recursionResult;
+        }
+
+        private static void getMoveFromAIRecursionHelper(ref eGameState io_CurrentState, TicTacToe.ePlayerSign i_Symbol, Board i_Board, ref int io_ISave, ref int io_JSave, ref int io_RecursionResult)
+        {
+            int maxWins = -2;
+            for (int i = 0; i < i_Board.Size; i++)
+            {
+                for (int j = 0; j < i_Board.Size; j++)
+                {
+                    if (!i_Board.AddMove(i, j, (char)i_Symbol))
+                    {
+                        continue;
+                    }
+
+                    io_CurrentState = IsGameOver(i_Board, new Point(i + 1, j + 1), (char)i_Symbol);
+                    TicTacToe.ePlayerSign oppositeSymbol = i_Symbol == TicTacToe.ePlayerSign.One ?
+                                                            TicTacToe.ePlayerSign.Two : TicTacToe.ePlayerSign.One;
+                    int wins = getMoveFromAIRecursion(ref io_CurrentState, oppositeSymbol, i_Board, ref io_ISave, ref io_JSave);
+                    i_Board.ClearSquare(i, j);
+                    io_RecursionResult += wins;
+                    if (maxWins < wins)
+                    {
+                        io_ISave = i; // row
+                        io_JSave = j; // column
+                        maxWins = wins;
                     }
                 }
             }
-
-            return recursionResult;
         }
     }
 }
