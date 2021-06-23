@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace B21_Ex02
+namespace Ex05.GameLogic
 {
     public class Board
     {

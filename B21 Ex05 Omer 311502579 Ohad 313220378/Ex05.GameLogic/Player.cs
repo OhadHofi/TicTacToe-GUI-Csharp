@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B21_Ex02
+namespace Ex05.GameLogic
 {
     public class Player
     {

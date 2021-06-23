@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Runtime;
 using System.Threading;
 
-namespace B21_Ex02
+namespace Ex05.GameLogic
 {
     public static class GameLogic
     {
@@ -139,24 +139,24 @@ namespace B21_Ex02
         }
 
         // Returns the winner of the game according to score
-        public static UI.ePlayerNumber? GetWinner(int i_Player1Score, int i_Player2Score)
-        {
-            UI.ePlayerNumber? winner;
-            if (i_Player1Score == i_Player2Score)
-            {
-                winner = null;
-            }
-            else if (i_Player1Score > i_Player2Score)
-            {
-                winner = UI.ePlayerNumber.One;
-            }
-            else
-            {
-                winner = UI.ePlayerNumber.Two;
-            }
+        //public static Player GetWinner(int i_Player1Score, int i_Player2Score)
+        //{
+        //   Player winner;
+        //    if (i_Player1Score == i_Player2Score)
+        //    {
+        //        winner = null;
+        //    }
+        //    else if (i_Player1Score > i_Player2Score)
+        //    {
+        //        winner = UI.ePlayerNumber.One;
+        //    }
+        //    else
+        //    {
+        //        winner = UI.ePlayerNumber.Two;
+        //    }
 
-            return winner;
-        }
+        //    return winner;
+        //}
 
         public static void getMoveFromAI(TicTacToe.ePlayerSign i_Symbol, Board i_Board, ref eGameState io_CurrentState, ref bool io_GameOver)
         {
