@@ -1,6 +1,6 @@
 ﻿namespace Ex05.GameInterface
 {
-    public partial class GameSettings
+    public partial class GameSettingsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -208,7 +208,7 @@
             this.MinimizeBox = false;
             this.Name = "GameSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Game Settings";
+            this.Text = "Game Settings - TicTacToe";
             ((System.ComponentModel.ISupportInitialize)(this.numericRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericCols)).EndInit();
             this.ResumeLayout(false);

@@ -10,23 +10,24 @@ using System.Windows.Forms;
 
 namespace Ex05.GameInterface
 {
-    public partial class GameSettings : Form
+    public partial class GameSettingsForm : Form
     {
-        public GameSettings()
+        public GameSettingsForm()
         {
             InitializeComponent();
-            ShowDialog();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (Player1Name == string.Empty || (!AIPlayer2 && Player2Name == string.Empty))
+            // Not allowing empty names
+            if (Player1Name == string.Empty || (!IsPlayer2AI && Player2Name == string.Empty))
             {
                 MessageBox.Show("Please enter proper names (no blanks)");
             }
             else
             {
                 Close();
+
             }
         }
 
@@ -41,9 +42,9 @@ namespace Ex05.GameInterface
             get { return (int)numericCols.Value; }
         }
 
-        public bool AIPlayer2
+        public bool IsPlayer2AI
         {
-            get { return checkBoxPlayer2.Checked == false; }
+            get { return !checkBoxPlayer2.Checked; }
         }
 
         public string Player1Name
@@ -58,29 +59,31 @@ namespace Ex05.GameInterface
 
         private void numericRows_ValueChanged(object sender, EventArgs e)
         {
-            if(numericRows.Value > 10)
+            if(numericRows.Value > numericRows.Maximum)
             {
-                numericRows.Value = 10;
+                numericRows.Value = numericRows.Maximum;
             }
-            else if (numericRows.Value < 4)
+            else if (numericRows.Value < numericRows.Minimum)
             {
-                numericRows.Value = 4;
+                numericRows.Value = numericRows.Minimum;
             }
 
+            // Update rows & cols to be identical
             numericCols.Value = numericRows.Value;
         }
 
         private void numericCols_ValueChanged(object sender, EventArgs e)
         {
-            if (numericCols.Value > 10)
+            if (numericCols.Value > numericCols.Maximum)
             {
-                numericCols.Value = 10;
+                numericCols.Value = numericCols.Maximum;
             }
-            else if (numericCols.Value < 4)
+            else if (numericCols.Value < numericCols.Minimum)
             {
-                numericCols.Value = 4;
+                numericCols.Value = numericCols.Minimum;
             }
 
+            // Update rows & cols to be identical
             numericRows.Value = numericCols.Value;
         }
     }
