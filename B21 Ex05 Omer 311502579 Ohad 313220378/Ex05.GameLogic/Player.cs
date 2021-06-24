@@ -21,31 +21,19 @@ namespace Ex05.GameLogic
 
         public int Score
         {
-            get
-            {
-                return m_Score;
-            }
+            get { return m_Score; }
 
-            set
-            {
-                m_Score = value;
-            }
+            set { m_Score = value; }
         }
 
         public char Symbol
         {
-            get
-            {
-                return r_Symbol;
-            }
+            get { return r_Symbol; }
         }
 
         public bool IsAI
         {
-            get
-            {
-                return !r_IsHuman;
-            }
+            get { return !r_IsHuman; }
         }
     }
 }

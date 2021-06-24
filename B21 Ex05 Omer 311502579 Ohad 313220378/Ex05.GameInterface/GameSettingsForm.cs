@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ex05.GameInterface
 {
     public partial class GameSettingsForm : Form
     {
+        private const string k_AIName = "[Computer]";
+
         public GameSettingsForm()
         {
             InitializeComponent();
@@ -26,15 +21,16 @@ namespace Ex05.GameInterface
             }
             else
             {
-                Close();
-
+                GameForm gameForm = new GameForm(BoardSize, Player1Name, Player2Name, IsPlayer2AI);
+                Dispose();
+                gameForm.ShowDialog();
             }
         }
 
         private void checkBoxPlayer2_CheckedChanged(object sender, EventArgs e)
         {
             textBoxPlayer2.Enabled = !textBoxPlayer2.Enabled;
-            textBoxPlayer2.Text = textBoxPlayer2.Enabled ? string.Empty : "[Computer]";
+            textBoxPlayer2.Text = textBoxPlayer2.Enabled ? string.Empty : k_AIName;
         }
 
         public int BoardSize

@@ -185,7 +185,7 @@
             0});
             this.numericCols.ValueChanged += new System.EventHandler(this.numericCols_ValueChanged);
             // 
-            // GameSettings
+            // GameSettingsForm
             // 
             this.AcceptButton = this.buttonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,14 +206,13 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "GameSettings";
+            this.Name = "GameSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game Settings - TicTacToe";
             ((System.ComponentModel.ISupportInitialize)(this.numericRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericCols)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

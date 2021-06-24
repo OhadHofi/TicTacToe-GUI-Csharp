@@ -13,7 +13,7 @@ namespace Ex05.GameLogic
         // enum for holding the possible states of the game
         public enum eGameState
         {
-            Draw, Lose, Continue, ReTry, GameOver
+            Draw, Lose, Continue, ReTry
         }
 
         // Returns the state of the game according to the current move that was played
@@ -164,7 +164,6 @@ namespace Ex05.GameLogic
             int yCoordSave = 0;
             eGameState currentState = eGameState.Continue;
             //UI.ShowAIMsg();
-            //Thread.Sleep(1200);
 
             /*  According to our checks as long as there are more than 9 empty cells, we can't properly calculate a good AI move in a decent time.
                 So, if there are more than 9 empty cells we go with a semi-random play - get random board indices but those that won't lead
