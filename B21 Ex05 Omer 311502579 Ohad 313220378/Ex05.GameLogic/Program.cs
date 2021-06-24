@@ -7,9 +7,8 @@ namespace Ex05.GameLogic
         public static void Main()
         {
             GameSettings gameSettings = new GameSettings();
-
             int size = gameSettings.BoardSize;
-            bool isAI = gameSettings.IsAIPlayer;
+            bool isAI = gameSettings.AIPlayer2;
             string player1 = gameSettings.Player1Name;
             string player2 = gameSettings.Player2Name;
 

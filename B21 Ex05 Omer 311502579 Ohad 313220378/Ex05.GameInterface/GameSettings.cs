@@ -18,14 +18,9 @@ namespace Ex05.GameInterface
             ShowDialog();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (Player1Name == string.Empty || !IsAIPlayer && Player2Name == string.Empty)
+            if (Player1Name == string.Empty || (!AIPlayer2 && Player2Name == string.Empty))
             {
                 MessageBox.Show("Please enter proper names (no blanks)");
             }
@@ -38,6 +33,7 @@ namespace Ex05.GameInterface
         private void checkBoxPlayer2_CheckedChanged(object sender, EventArgs e)
         {
             textBoxPlayer2.Enabled = !textBoxPlayer2.Enabled;
+            textBoxPlayer2.Text = textBoxPlayer2.Enabled ? string.Empty : "[Computer]";
         }
 
         public int BoardSize
@@ -45,7 +41,7 @@ namespace Ex05.GameInterface
             get { return (int)numericCols.Value; }
         }
 
-        public bool IsAIPlayer
+        public bool AIPlayer2
         {
             get { return checkBoxPlayer2.Checked == false; }
         }
@@ -86,11 +82,6 @@ namespace Ex05.GameInterface
             }
 
             numericRows.Value = numericCols.Value;
-        }
-
-        private void textBoxPlayer1_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

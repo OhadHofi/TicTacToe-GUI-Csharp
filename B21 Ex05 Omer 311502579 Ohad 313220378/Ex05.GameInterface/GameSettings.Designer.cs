@@ -1,7 +1,6 @@
-﻿
-namespace Ex05.GameInterface
+﻿namespace Ex05.GameInterface
 {
-    partial class GameSettings
+    public partial class GameSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -18,6 +17,7 @@ namespace Ex05.GameInterface
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -72,7 +72,6 @@ namespace Ex05.GameInterface
             this.textBoxPlayer1.Name = "textBoxPlayer1";
             this.textBoxPlayer1.Size = new System.Drawing.Size(142, 20);
             this.textBoxPlayer1.TabIndex = 1;
-            this.textBoxPlayer1.TextChanged += new System.EventHandler(this.textBoxPlayer1_TextChanged);
             // 
             // label1
             // 
@@ -210,7 +209,6 @@ namespace Ex05.GameInterface
             this.Name = "GameSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game Settings";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericCols)).EndInit();
             this.ResumeLayout(false);
@@ -234,4 +232,3 @@ namespace Ex05.GameInterface
         private System.Windows.Forms.NumericUpDown numericCols;
     }
 }
-
