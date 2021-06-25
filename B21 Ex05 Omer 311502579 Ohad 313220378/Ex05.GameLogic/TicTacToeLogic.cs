@@ -7,7 +7,7 @@ namespace Ex05.GameLogic
 {
     public static class TicTacToeLogic
     {
-        public const int k_NumCellsForFastCalculation = 8;
+        public const int k_NumCellsForFastCalculation = 9;
         public static Random s_Randomizer = new Random();
 
         // enum for holding the possible states of the game

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 
 namespace Ex05.GameInterface
 {
@@ -32,8 +31,6 @@ namespace Ex05.GameInterface
         /// </summary>
         private void InitializeComponent()
         {
-            this.BackColor = Color.LightCyan;
-
             this.Player1Name = new System.Windows.Forms.Label();
             this.Player1Score = new System.Windows.Forms.Label();
             this.Player2Name = new System.Windows.Forms.Label();

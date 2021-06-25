@@ -178,9 +178,9 @@ namespace Ex05.GameInterface
                     else 
                     {
                         m_TicTacToeGame.SwitchPlayer();
-                        changeBoldText();
                         if (r_IsPlayer2AI)
                         {
+                            changeBoldText();
                             makeAIMove(state);
                         }
                     }

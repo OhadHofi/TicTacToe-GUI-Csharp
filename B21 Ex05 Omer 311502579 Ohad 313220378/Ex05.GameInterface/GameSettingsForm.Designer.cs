@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Ex05.GameInterface
+﻿namespace Ex05.GameInterface
 {
     public partial class GameSettingsForm
     {
@@ -31,7 +29,6 @@ namespace Ex05.GameInterface
         /// </summary>
         private void InitializeComponent()
         {
-            this.BackColor = Color.LightCyan;
             this.textBoxPlayer2 = new System.Windows.Forms.TextBox();
             this.buttonStart = new System.Windows.Forms.Button();
             this.textBoxPlayer1 = new System.Windows.Forms.TextBox();
