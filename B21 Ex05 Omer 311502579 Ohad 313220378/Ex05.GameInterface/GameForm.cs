@@ -136,6 +136,10 @@ namespace Ex05.GameInterface
                     m_ButtonsBoard[i, j].Text = string.Empty;
                 }
             }
+            Player1Name.Font = new Font(Player1Name.Font, FontStyle.Bold);
+            Player1Score.Font = new Font(Player1Score.Font, FontStyle.Bold);
+            Player2Name.Font = new Font(Player2Name.Font, FontStyle.Regular);
+            Player2Score.Font = new Font(Player2Score.Font, FontStyle.Regular);
         }
 
         private void changeBoldText()
@@ -165,13 +169,16 @@ namespace Ex05.GameInterface
                 {
                     updateGameBoard(button.Row, button.Col, m_TicTacToeGame.CurrentPlayer.Symbol);
                     GameLogic.TicTacToeLogic.eGameState state = m_TicTacToeGame.GameState;
-                    if(state == GameLogic.TicTacToeLogic.eGameState.Lose || state == GameLogic.TicTacToeLogic.eGameState.Draw)
+                    changeBoldText();
+
+                    if (state == GameLogic.TicTacToeLogic.eGameState.Lose || state == GameLogic.TicTacToeLogic.eGameState.Draw)
                     {
                         m_TicTacToeGame.HandleGameOver();
                     }
                     else 
                     {
                         m_TicTacToeGame.SwitchPlayer();
+                        changeBoldText();
                         if (r_IsPlayer2AI)
                         {
                             makeAIMove(state);

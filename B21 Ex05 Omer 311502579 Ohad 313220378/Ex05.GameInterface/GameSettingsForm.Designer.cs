@@ -1,4 +1,6 @@
-﻿namespace Ex05.GameInterface
+﻿using System.Drawing;
+
+namespace Ex05.GameInterface
 {
     public partial class GameSettingsForm
     {
@@ -29,6 +31,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.BackColor = Color.LightCyan;
             this.textBoxPlayer2 = new System.Windows.Forms.TextBox();
             this.buttonStart = new System.Windows.Forms.Button();
             this.textBoxPlayer1 = new System.Windows.Forms.TextBox();
@@ -143,12 +146,12 @@
             // 
             this.numericRows.Location = new System.Drawing.Point(98, 181);
             this.numericRows.Maximum = new decimal(new int[] {
-            10,
+            9,
             0,
             0,
             0});
             this.numericRows.Minimum = new decimal(new int[] {
-            4,
+            3,
             0,
             0,
             0});
@@ -156,7 +159,7 @@
             this.numericRows.Size = new System.Drawing.Size(38, 20);
             this.numericRows.TabIndex = 7;
             this.numericRows.Value = new decimal(new int[] {
-            4,
+            3,
             0,
             0,
             0});
@@ -166,12 +169,12 @@
             // 
             this.numericCols.Location = new System.Drawing.Point(233, 181);
             this.numericCols.Maximum = new decimal(new int[] {
-            10,
+            9,
             0,
             0,
             0});
             this.numericCols.Minimum = new decimal(new int[] {
-            4,
+            3,
             0,
             0,
             0});
@@ -179,7 +182,7 @@
             this.numericCols.Size = new System.Drawing.Size(38, 20);
             this.numericCols.TabIndex = 9;
             this.numericCols.Value = new decimal(new int[] {
-            4,
+            3,
             0,
             0,
             0});
