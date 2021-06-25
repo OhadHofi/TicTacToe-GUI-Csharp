@@ -2,7 +2,7 @@
 
 namespace Ex05.GameInterface
 {
-    partial class GameForm
+    public partial class GameForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,6 +41,7 @@ namespace Ex05.GameInterface
             // 
             // Player1Score
             // 
+
             this.Player1Score.AutoSize = true;
             this.Player1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Player1Score.Name = "Player1Score";
@@ -49,11 +50,10 @@ namespace Ex05.GameInterface
             this.Player1Score.Text = "0";
             this.Player1Score.Location = new System.Drawing.Point(Width / 2 - 20, Bottom - 60);
 
-
-
             // 
             // Player1Name
             // 
+
             this.Player1Name.AutoSize = true;
             this.Player1Name.Size = new System.Drawing.Size(53, 13);
             this.Player1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
@@ -61,11 +61,11 @@ namespace Ex05.GameInterface
             this.Player1Name.TabIndex = 0;
             this.Player1Name.Text = string.Format("{0}: ", r_Player1Name);
             this.Player1Name.Location = new System.Drawing.Point(Player1Score.Location.X - 7 * (Player1Name.Text.Length), Player1Score.Location.Y);
-            
 
             // 
             // Player2Name
             // 
+
             this.Player2Name.AutoSize = true;
             this.Player2Name.Name = "Player2Name";
             this.Player2Name.Size = new System.Drawing.Size(45, 13);
@@ -76,16 +76,18 @@ namespace Ex05.GameInterface
             // 
             // Player2Score
             // 
+
             this.Player2Score.AutoSize = true;
             this.Player2Score.Name = "Player2Score";
             this.Player2Score.Size = new System.Drawing.Size(13, 13);
             this.Player2Score.TabIndex = 2;
             this.Player2Score.Text = "0";
-            this.Player2Score.Location = new System.Drawing.Point(this.Player2Name.Location.X + 6 * (Player2Name.Text.Length), this.Player2Name.Location.Y);
+            this.Player2Score.Location = new System.Drawing.Point(this.Player2Name.Location.X + 7 * (Player2Name.Text.Length), this.Player2Name.Location.Y);
 
             // 
             // GameForm
             // 
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.Player2Name);

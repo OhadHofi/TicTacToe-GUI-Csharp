@@ -7,12 +7,15 @@ namespace Ex05.GameLogic
     public class TicTacToe
     {
         public event Action InvalidPlay;
+
         public event Action GameOver;
+
         public event Action PlayerSwitch;
 
         private Board m_Board;
         private Player m_Player1, m_Player2, m_CurrentPlayer;
         private TicTacToeLogic.eGameState m_GameState;
+
         public TicTacToe(int i_BoardSize, bool i_IsPlayer2Human)
         {
             m_Board = new Board(i_BoardSize);

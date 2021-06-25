@@ -136,6 +136,7 @@ namespace Ex05.GameInterface
                     m_ButtonsBoard[i, j].Text = string.Empty;
                 }
             }
+
             Player1Name.Font = new Font(Player1Name.Font, FontStyle.Bold);
             Player1Score.Font = new Font(Player1Score.Font, FontStyle.Bold);
             Player2Name.Font = new Font(Player2Name.Font, FontStyle.Regular);
@@ -204,9 +205,11 @@ namespace Ex05.GameInterface
 
         private bool endOfRoundMessageBox(string i_WinnerName)
         {
-            string message = string.Format("{0}{1}Would you like to play another round?",
-                        i_WinnerName == string.Empty ? "A draw between the two players!" :
-                        string.Format("The winner is {0}!", i_WinnerName), Environment.NewLine);
+            string drawOrWin = i_WinnerName == string.Empty ? "A draw between the two players!" :
+                                               string.Format(
+                                                      "The winner is {0}!",
+                                                       i_WinnerName);
+            string message = string.Format("{0}{1}Would you like to play another round?", drawOrWin, Environment.NewLine);
             string title = i_WinnerName == string.Empty ? "A draw!" : "A win!";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show(message, title, buttons);
