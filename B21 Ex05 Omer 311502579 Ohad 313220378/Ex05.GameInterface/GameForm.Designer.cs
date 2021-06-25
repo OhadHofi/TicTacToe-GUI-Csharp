@@ -43,11 +43,12 @@ namespace Ex05.GameInterface
             // 
             this.Player1Score.AutoSize = true;
             this.Player1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Player1Score.Location = new System.Drawing.Point(Width / 2 - 5, Bottom - 60);
             this.Player1Score.Name = "Player1Score";
             this.Player1Score.Size = new System.Drawing.Size(14, 13);
             this.Player1Score.TabIndex = 1;
             this.Player1Score.Text = "0";
+            this.Player1Score.Location = new System.Drawing.Point(Width / 2 - 27, Bottom - 60);
+
 
 
             // 
@@ -56,11 +57,12 @@ namespace Ex05.GameInterface
             this.Player1Name.AutoSize = true;
             this.Player1Name.Size = new System.Drawing.Size(53, 13);
             this.Player1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.Player1Name.Location = new System.Drawing.Point(Player1Score.Location.X - Player1Name.Width - 15, Player1Score.Location.Y);
             this.Player1Name.Name = "Player1Name";
             this.Player1Name.TabIndex = 0;
             this.Player1Name.Text = string.Format("{0}: ", r_Player1Name);
+            this.Player1Name.Location = new System.Drawing.Point(Player1Score.Location.X - 4*(Player1Name.Text.Length + 4), Player1Score.Location.Y);
             
+
             // 
             // Player2Name
             // 
@@ -93,6 +95,7 @@ namespace Ex05.GameInterface
             this.Text = "Tic-Tac-Toe 2021";
             this.Load += GameForm_Load;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.MaximizeBox = false;
             this.ResumeLayout(false);
             this.PerformLayout();
         }

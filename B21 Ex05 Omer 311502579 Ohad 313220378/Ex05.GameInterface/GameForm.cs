@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using Ex05.GameLogic;
 
@@ -31,18 +32,15 @@ namespace Ex05.GameInterface
             m_TicTacToeGame = new TicTacToe(r_BoardSize, r_IsPlayer2AI);
             m_TicTacToeGame.InvalidPlay += TicTacToeGame_InvalidPlay;
             m_TicTacToeGame.GameOver += TicTacToeGame_GameOver;
+            m_TicTacToeGame.PlayerSwitch += changeBoldText;
         }
 
         private void TicTacToeGame_GameOver()
         {
             string roundWinner = getRoundWinnerAndUpdateScore();
             string finalWinner = getFinalWinnerName();
-            GameOverPromptForm gameOverPromptForm = new GameOverPromptForm(
-                                                    roundWinner,
-                                                    m_TicTacToeGame.GameState == GameLogic.GameLogic.eGameState.Draw);
             Opacity = 0.8;
-            gameOverPromptForm.ShowDialog();
-            if(gameOverPromptForm.DialogResult == DialogResult.OK)
+            if(endOfRoundMessageBox(roundWinner))
             {
                 m_TicTacToeGame.GameBoard.ClearBoard();
                 clearGameBoard();
@@ -59,11 +57,10 @@ namespace Ex05.GameInterface
             Opacity = 1;
         }
 
-
         private string getRoundWinnerAndUpdateScore()
         {
             string winnerName = string.Empty;
-            if (m_TicTacToeGame.GameState != GameLogic.GameLogic.eGameState.Draw)
+            if (m_TicTacToeGame.GameState != GameLogic.TicTacToeLogic.eGameState.Draw)
             {
                 winnerName = m_TicTacToeGame.CurrentPlayer == m_TicTacToeGame.Player1 ?
                              r_Player2Name : r_Player1Name;
@@ -83,7 +80,7 @@ namespace Ex05.GameInterface
         private string getFinalWinnerName()
         {
             string winnerName = string.Empty;
-            if(m_TicTacToeGame.GameState != GameLogic.GameLogic.eGameState.Draw)
+            if(m_TicTacToeGame.GameState != GameLogic.TicTacToeLogic.eGameState.Draw)
             {
                 if(m_TicTacToeGame.Player1.Score > m_TicTacToeGame.Player2.Score)
                 {
@@ -127,7 +124,6 @@ namespace Ex05.GameInterface
             buttonToUpdate.Text = i_PlayerSymbol.ToString();
             buttonToUpdate.BackColor = i_PlayerSymbol == (char)GameLogic.TicTacToe.ePlayerSign.One 
                                                      ? k_Player1Color : k_Player2Color;
-            changeBoldText();
         }
 
         private void clearGameBoard()
@@ -168,16 +164,46 @@ namespace Ex05.GameInterface
                 if(m_TicTacToeGame.GetMoveFromPlayer(new Point(button.Row + 1, button.Col + 1)))
                 {
                     updateGameBoard(button.Row, button.Col, m_TicTacToeGame.CurrentPlayer.Symbol);
-                    GameLogic.GameLogic.eGameState state = m_TicTacToeGame.GameState;
-                    if(state == GameLogic.GameLogic.eGameState.Lose || state == GameLogic.GameLogic.eGameState.Draw)
+                    GameLogic.TicTacToeLogic.eGameState state = m_TicTacToeGame.GameState;
+                    if(state == GameLogic.TicTacToeLogic.eGameState.Lose || state == GameLogic.TicTacToeLogic.eGameState.Draw)
                     {
                         m_TicTacToeGame.HandleGameOver();
-                        m_TicTacToeGame.SwitchPlayer();
                     }
-                    m_TicTacToeGame.SwitchPlayer();
-
+                    else 
+                    {
+                        m_TicTacToeGame.SwitchPlayer();
+                        if (r_IsPlayer2AI)
+                        {
+                            makeAIMove(state);
+                        }
+                    }
                 }
             }
+        }
+
+        private void makeAIMove(GameLogic.TicTacToeLogic.eGameState i_GameState)
+        {
+            GameLogic.TicTacToeLogic.GetMoveFromAI(GameLogic.TicTacToe.ePlayerSign.Two, m_TicTacToeGame.GameBoard, ref i_GameState, out Point newMove);
+            updateGameBoard(newMove.X, newMove.Y, m_TicTacToeGame.CurrentPlayer.Symbol);
+            if (i_GameState == GameLogic.TicTacToeLogic.eGameState.Lose || i_GameState == GameLogic.TicTacToeLogic.eGameState.Draw)
+            {
+                m_TicTacToeGame.GameState = i_GameState;
+                m_TicTacToeGame.HandleGameOver();
+                m_TicTacToeGame.SwitchPlayer();
+            }
+
+            m_TicTacToeGame.SwitchPlayer();
+        }
+
+        private bool endOfRoundMessageBox(string i_WinnerName)
+        {
+            string message = string.Format("{0}{1}Would you like to play another round?",
+                        i_WinnerName == string.Empty ? "A draw between the two players!" :
+                        string.Format("The winner is {0}!", i_WinnerName), Environment.NewLine);
+            string title = i_WinnerName == string.Empty ? "A draw!" : "A win!";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            return result == DialogResult.Yes;
         }
     }
 }

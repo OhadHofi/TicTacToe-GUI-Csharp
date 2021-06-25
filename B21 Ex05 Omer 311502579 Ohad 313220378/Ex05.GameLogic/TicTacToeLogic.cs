@@ -5,9 +5,9 @@ using System.Threading;
 
 namespace Ex05.GameLogic
 {
-    public static class GameLogic
+    public static class TicTacToeLogic
     {
-        public const int k_NumCellsForFastCalculation = 9;
+        public const int k_NumCellsForFastCalculation = 8;
         public static Random s_Randomizer = new Random();
 
         // enum for holding the possible states of the game
@@ -129,41 +129,19 @@ namespace Ex05.GameLogic
             return gameState;
         }
 
-        public static bool MakeMove(Point? i_CurrentMove, Board i_GameBoard, char i_PlayerSign)
+        public static bool MakeMove(Point i_CurrentMove, Board i_GameBoard, char i_PlayerSign)
         {
-            return i_CurrentMove != null &&
-                            i_GameBoard.AddMove(
-                                        i_CurrentMove.Value.X - 1,
-                                        i_CurrentMove.Value.Y - 1,
+            return i_GameBoard.AddMove(
+                                        i_CurrentMove.X - 1,
+                                        i_CurrentMove.Y - 1,
                                         i_PlayerSign);
         }
 
-        // Returns the winner of the game according to score
-        //public static Player GetWinner(int i_Player1Score, int i_Player2Score)
-        //{
-        //   Player winner;
-        //    if (i_Player1Score == i_Player2Score)
-        //    {
-        //        winner = null;
-        //    }
-        //    else if (i_Player1Score > i_Player2Score)
-        //    {
-        //        winner = UI.ePlayerNumber.One;
-        //    }
-        //    else
-        //    {
-        //        winner = UI.ePlayerNumber.Two;
-        //    }
-
-        //    return winner;
-        //}
-
-        public static void getMoveFromAI(TicTacToe.ePlayerSign i_Symbol, Board i_Board, ref eGameState io_CurrentState, ref bool io_GameOver)
+        public static void GetMoveFromAI(TicTacToe.ePlayerSign i_Symbol, Board i_Board, ref eGameState io_CurrentState, out Point o_Move)
         {
             int xCoordSave = 0;
             int yCoordSave = 0;
             eGameState currentState = eGameState.Continue;
-            //UI.ShowAIMsg();
 
             /*  According to our checks as long as there are more than 9 empty cells, we can't properly calculate a good AI move in a decent time.
                 So, if there are more than 9 empty cells we go with a semi-random play - get random board indices but those that won't lead
@@ -203,14 +181,8 @@ namespace Ex05.GameLogic
             }
 
             // Reflect current game state change
-            io_CurrentState = IsGameOver(
-                                        i_Board,
-                                        new Point(xCoordSave, yCoordSave),
-                                        'O');
-            io_GameOver = !io_CurrentState.Equals(eGameState.Continue);
-
-            //Ex02.ConsoleUtils.Screen.Clear(); ---> clear forms screen
-            i_Board.PrintBoard();
+            io_CurrentState = IsGameOver(i_Board, new Point(xCoordSave, yCoordSave), 'O');
+            o_Move = new Point(xCoordSave - 1, yCoordSave - 1);
         }
 
         private static int getMoveFromAIRecursion(ref eGameState io_CurrentState, TicTacToe.ePlayerSign i_Symbol, Board i_Board, ref int io_ISave, ref int io_JSave)
@@ -239,33 +211,9 @@ namespace Ex05.GameLogic
             }
             else
             {
-                //int maxWins = -2;
-                //for (int i = 0; i < i_Board.Size; i++)
-                //{
-                //    for (int j = 0; j < i_Board.Size; j++)
-                //    {
-                //        if (!i_Board.AddMove(i, j, (char)i_Symbol))
-                //        {
-                //            continue;
-                //        }
-
-                //        io_CurrentState = IsGameOver(i_Board, new Point(i + 1, j + 1), (char)i_Symbol);
-                //        TicTacToe.ePlayerSign oppositeSymbol = i_Symbol == TicTacToe.ePlayerSign.One ?
-                //                                                TicTacToe.ePlayerSign.Two : TicTacToe.ePlayerSign.One;
-                //        int wins = getMoveFromAIRecursion(ref io_CurrentState, oppositeSymbol, i_Board, ref io_ISave, ref io_JSave);
-                //        i_Board.ClearSquare(i, j);
-                //        recursionResult += wins;
-                //        if (maxWins < wins)
-                //        {
-                //            io_ISave = i; // row
-                //            io_JSave = j; // column
-                //            maxWins = wins;
-                //        }
-                //    }
                 getMoveFromAIRecursionHelper(ref io_CurrentState, i_Symbol, i_Board, ref io_ISave, ref io_JSave, ref recursionResult);
             }
             
-
             return recursionResult;
         }
 

@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
-    <Compile Include="GameLogic.cs" />
+    <Compile Include="TicTacToeLogic.cs" />
     <Compile Include="MoveEventArgs.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="TicTacToe.cs" />
