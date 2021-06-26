@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime;
-using System.Threading;
 
 namespace Ex05.GameLogic
 {

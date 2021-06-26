@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
 using Ex05.GameLogic;
 
@@ -8,15 +7,18 @@ namespace Ex05.GameInterface
 {
     public partial class GameForm : Form
     {
+        // UI related fields
         private const int k_ButtonSize = 50;
         private readonly Color k_Player1Color = Color.PeachPuff;
         private readonly Color k_Player2Color = Color.LightSeaGreen;
+
         private readonly string r_Player1Name, r_Player2Name;
         private readonly bool r_IsPlayer2AI;
         private readonly int r_BoardSize;
         private TicTacToeButton[,] m_ButtonsBoard = null;
         private TicTacToe m_TicTacToeGame = null;
 
+        // The ctor receives the settings from the settings from 'GameSettingsForm'
         public GameForm(int i_BoardSize, string i_Player1Name, string i_Player2Name, bool i_IsAI)
         {
             r_Player1Name = i_Player1Name;
@@ -26,6 +28,7 @@ namespace Ex05.GameInterface
             InitializeComponent();
         }
 
+        // When form is loaded - the game board interface & the game are initalized with events added
         private void GameForm_Load(object sender, EventArgs e)
         {
             initGameBoard();
@@ -35,22 +38,21 @@ namespace Ex05.GameInterface
             m_TicTacToeGame.PlayerSwitch += changeBoldText;
         }
 
+        // This method is called whenever a round is over to show the winner and ask for another round (using a constructed MessageBox)
         private void TicTacToeGame_GameOver()
         {
             string roundWinner = getRoundWinnerAndUpdateScore();
-            string finalWinner = getFinalWinnerName();
+            string finalWinner = getFinalWinnerName(); // In case the game does not continue - gets the player with the highest score to show as winner
             Opacity = 0.8;
             if(endOfRoundMessageBox(roundWinner))
             {
-                m_TicTacToeGame.GameBoard.ClearBoard();
                 clearGameBoard();
-                m_TicTacToeGame.CurrentPlayer = m_TicTacToeGame.Player1;
             }
             else
             {
                 MessageBox.Show(string.Format(
-                               "{0}",
-                               finalWinner != string.Empty ? string.Format("The winner is {0}", finalWinner) : "A draw between the players!"));
+                                       "{0}",
+                                       finalWinner != string.Empty ? string.Format("The winner is {0}", finalWinner) : "A draw between the players!"));
                 Close();
             }
 
@@ -100,6 +102,7 @@ namespace Ex05.GameInterface
             MessageBox.Show("Invalid move!", "Error");
         }
 
+        // Initializes the buttons of the game, adds their click event and adds them as controls in the form
         private void initGameBoard()
         {
             m_ButtonsBoard = new TicTacToeButton[r_BoardSize, r_BoardSize];
@@ -111,13 +114,14 @@ namespace Ex05.GameInterface
                     TicTacToeButton button = new TicTacToeButton(i, j, k_ButtonSize);
                     button.BackColor = Color.LightBlue;
                     button.Text = string.Empty;
-                    button.Click += new EventHandler(newBoardButton_Click);
+                    button.Click += new EventHandler(ticTacToeButton_OnClick);
                     Controls.Add(button);
                     m_ButtonsBoard[i, j] = button;
                 }
             }
         }
 
+        // Updates a button visually to reflect a move by one of the players
         private void updateGameBoard(int i_Row, int i_Col, char i_PlayerSymbol)
         {
             TicTacToeButton buttonToUpdate = m_ButtonsBoard[i_Row, i_Col];
@@ -137,12 +141,14 @@ namespace Ex05.GameInterface
                 }
             }
 
+            // Change the bold text back to player1 to prepare for next round
             Player1Name.Font = new Font(Player1Name.Font, FontStyle.Bold);
             Player1Score.Font = new Font(Player1Score.Font, FontStyle.Bold);
             Player2Name.Font = new Font(Player2Name.Font, FontStyle.Regular);
             Player2Score.Font = new Font(Player2Score.Font, FontStyle.Regular);
         }
 
+        // Switches bold texts of players labels to reflect players' turn
         private void changeBoldText()
         {
             if (Player1Name.Font.Bold)
@@ -161,7 +167,7 @@ namespace Ex05.GameInterface
             }
         }
 
-        private void newBoardButton_Click(object sender, EventArgs e)
+        private void ticTacToeButton_OnClick(object sender, EventArgs e)
         {
             TicTacToeButton button = sender as TicTacToeButton;
             if(button != null)
@@ -170,7 +176,6 @@ namespace Ex05.GameInterface
                 {
                     updateGameBoard(button.Row, button.Col, m_TicTacToeGame.CurrentPlayer.Symbol);
                     GameLogic.TicTacToeLogic.eGameState state = m_TicTacToeGame.GameState;
-                    changeBoldText();
 
                     if (state == GameLogic.TicTacToeLogic.eGameState.Lose || state == GameLogic.TicTacToeLogic.eGameState.Draw)
                     {
@@ -181,7 +186,6 @@ namespace Ex05.GameInterface
                         m_TicTacToeGame.SwitchPlayer();
                         if (r_IsPlayer2AI)
                         {
-                            changeBoldText();
                             makeAIMove(state);
                         }
                     }

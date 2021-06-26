@@ -9,14 +9,14 @@ namespace Ex05.GameLogic
     public class Player
     {
         private readonly char r_Symbol;
-        private readonly bool r_IsHuman;
+        private readonly bool r_IsAI;
         private int m_Score;
 
-        public Player(bool i_IsHuman, char i_Symbol)
+        public Player(bool i_IsAI, char i_Symbol)
         {
             m_Score = 0;
             r_Symbol = i_Symbol;
-            r_IsHuman = i_IsHuman;
+            r_IsAI = i_IsAI;
         }
 
         public int Score
@@ -33,7 +33,7 @@ namespace Ex05.GameLogic
 
         public bool IsAI
         {
-            get { return !r_IsHuman; }
+            get { return r_IsAI; }
         }
     }
 }

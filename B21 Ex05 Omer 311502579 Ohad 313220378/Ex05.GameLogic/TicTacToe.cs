@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Threading;
 
 namespace Ex05.GameLogic
 {
@@ -16,11 +15,11 @@ namespace Ex05.GameLogic
         private Player m_Player1, m_Player2, m_CurrentPlayer;
         private TicTacToeLogic.eGameState m_GameState;
 
-        public TicTacToe(int i_BoardSize, bool i_IsPlayer2Human)
+        public TicTacToe(int i_BoardSize, bool i_IsPlayer2AI)
         {
             m_Board = new Board(i_BoardSize);
             m_Player1 = new Player(true, (char)ePlayerSign.One);
-            m_Player2 = new Player(i_IsPlayer2Human, (char)ePlayerSign.Two);
+            m_Player2 = new Player(i_IsPlayer2AI, (char)ePlayerSign.Two);
             m_CurrentPlayer = m_Player1;
             m_GameState = TicTacToeLogic.eGameState.Continue;
         }
@@ -71,7 +70,17 @@ namespace Ex05.GameLogic
                 }
             }
 
-            GameOver.Invoke();
+            OnGameOver();
+            CurrentPlayer = Player1;
+            GameBoard.ClearBoard();
+        }
+
+        private void OnGameOver()
+        {
+            if(GameOver != null)
+            {
+                GameOver.Invoke();
+            }
         }
 
         public bool GetMoveFromPlayer(Point i_MoveToMake)
@@ -82,7 +91,7 @@ namespace Ex05.GameLogic
                     m_Board,
                     CurrentPlayer == Player1 ? Player1.Symbol : Player2.Symbol))
             {
-                InvalidPlay.Invoke();
+                OnInvalidPlay();
                 m_GameState = TicTacToeLogic.eGameState.ReTry;
             }
             else
@@ -97,14 +106,30 @@ namespace Ex05.GameLogic
             return madeMove;
         }
 
+        private void OnInvalidPlay()
+        {
+            if(InvalidPlay != null)
+            {
+                InvalidPlay.Invoke();
+            }
+        }
+
         public void SwitchPlayer()
         {
             if(!m_Player2.IsAI)
             {
-                PlayerSwitch.Invoke();
+                OnPlayerSwitch();
             }
 
             m_CurrentPlayer = CurrentPlayer == Player1 ? Player2 : Player1;
+        }
+
+        private void OnPlayerSwitch()
+        {
+            if(PlayerSwitch != null)
+            {
+                PlayerSwitch.Invoke();
+            }
         }
     }
 }
