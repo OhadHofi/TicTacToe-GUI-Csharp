@@ -52,7 +52,7 @@
             this.textBoxPlayer2.Name = "textBoxPlayer2";
             this.textBoxPlayer2.Size = new System.Drawing.Size(142, 20);
             this.textBoxPlayer2.TabIndex = 4;
-            this.textBoxPlayer2.Text = "[Computer]";
+            this.textBoxPlayer2.Text = "Computer";
             // 
             // buttonStart
             // 

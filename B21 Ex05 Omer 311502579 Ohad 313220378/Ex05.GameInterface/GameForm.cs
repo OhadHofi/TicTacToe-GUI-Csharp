@@ -18,7 +18,7 @@ namespace Ex05.GameInterface
         private TicTacToeButton[,] m_ButtonsBoard = null;
         private TicTacToe m_TicTacToeGame = null;
 
-        // The ctor receives the settings from the settings from 'GameSettingsForm'
+        // The ctor receives the settings from 'GameSettingsForm'
         public GameForm(int i_BoardSize, string i_Player1Name, string i_Player2Name, bool i_IsAI)
         {
             r_Player1Name = i_Player1Name;

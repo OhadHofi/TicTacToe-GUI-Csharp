@@ -5,7 +5,7 @@ namespace Ex05.GameInterface
 {
     public partial class GameSettingsForm : Form
     {
-        private const string k_AIName = "[Computer]";
+        private const string k_AIName = "Computer";
 
         public GameSettingsForm()
         {
@@ -14,10 +14,14 @@ namespace Ex05.GameInterface
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            // Not allowing empty names
+            // Not allowing empty names or names longer than 8 chars (to limit UI conflicts)
             if (Player1Name == string.Empty || (!IsPlayer2AI && Player2Name == string.Empty))
             {
-                MessageBox.Show("Please enter proper names (no blanks)");
+                MessageBox.Show("Please enter proper names (no blanks)", "Error");
+            }
+            else if (Player1Name.Length > 8 || Player2Name.Length > 8)
+            {
+                MessageBox.Show("Please enter proper names (up to 8 chars)", "Error");
             }
             else
             {

@@ -45,20 +45,20 @@ namespace Ex05.GameInterface
             this.Player1Score.AutoSize = true;
             this.Player1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Player1Score.Name = "Player1Score";
-            this.Player1Score.Size = new System.Drawing.Size(14, 13);
+            this.Player1Score.AutoSize = true;
             this.Player1Score.TabIndex = 1;
             this.Player1Score.Text = "0";
-            this.Player1Score.Location = new System.Drawing.Point(Width / 2 - 20, Bottom - 60);
+            this.Player1Score.Location = new System.Drawing.Point(Width / 2 - 25, Bottom - 60);
 
             // 
             // Player1Name
             // 
 
             this.Player1Name.AutoSize = true;
-            this.Player1Name.Size = new System.Drawing.Size(53, 13);
             this.Player1Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
             this.Player1Name.Name = "Player1Name";
             this.Player1Name.TabIndex = 0;
+            this.Player1Name.AutoSize = true;
             this.Player1Name.Text = string.Format("{0}: ", r_Player1Name);
             this.Player1Name.Location = new System.Drawing.Point(Player1Score.Location.X - 7 * (Player1Name.Text.Length), Player1Score.Location.Y);
 
@@ -68,10 +68,10 @@ namespace Ex05.GameInterface
 
             this.Player2Name.AutoSize = true;
             this.Player2Name.Name = "Player2Name";
-            this.Player2Name.Size = new System.Drawing.Size(45, 13);
+            this.Player2Name.AutoSize = true;
             this.Player2Name.TabIndex = 3;
             this.Player2Name.Text = string.Format(r_IsPlayer2AI ? "Computer: " : "{0}: ", r_Player2Name);
-            this.Player2Name.Location = new System.Drawing.Point(Width / 2, this.Player1Score.Location.Y);
+            this.Player2Name.Location = new System.Drawing.Point(Width / 2 - 5, this.Player1Score.Location.Y);
 
             // 
             // Player2Score
@@ -79,7 +79,7 @@ namespace Ex05.GameInterface
 
             this.Player2Score.AutoSize = true;
             this.Player2Score.Name = "Player2Score";
-            this.Player2Score.Size = new System.Drawing.Size(13, 13);
+            this.Player1Score.AutoSize = true;
             this.Player2Score.TabIndex = 2;
             this.Player2Score.Text = "0";
             this.Player2Score.Location = new System.Drawing.Point(this.Player2Name.Location.X + 7 * (Player2Name.Text.Length), this.Player2Name.Location.Y);
