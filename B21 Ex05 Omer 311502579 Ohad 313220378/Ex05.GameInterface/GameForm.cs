@@ -62,17 +62,17 @@ namespace Ex05.GameInterface
         private string getRoundWinnerAndUpdateScore()
         {
             string winnerName = string.Empty;
-            if (m_TicTacToeGame.GameState != GameLogic.TicTacToeLogic.eGameState.Draw)
+            if (m_TicTacToeGame.GameState != TicTacToeLogic.eGameState.Draw)
             {
                 winnerName = m_TicTacToeGame.CurrentPlayer == m_TicTacToeGame.Player1 ?
                              r_Player2Name : r_Player1Name;
                 if(m_TicTacToeGame.CurrentPlayer == m_TicTacToeGame.Player1)
                 {
-                    Player2Score.Text = (int.Parse(Player2Score.Text) + 1).ToString();
+                    player2Score.Text = (int.Parse(player2Score.Text) + 1).ToString();
                 }
                 else
                 {
-                    Player1Score.Text = (int.Parse(Player1Score.Text) + 1).ToString();
+                    player1Score.Text = (int.Parse(player1Score.Text) + 1).ToString();
                 }
             }
 
@@ -82,7 +82,7 @@ namespace Ex05.GameInterface
         private string getFinalWinnerName()
         {
             string winnerName = string.Empty;
-            if(m_TicTacToeGame.GameState != GameLogic.TicTacToeLogic.eGameState.Draw)
+            if(m_TicTacToeGame.GameState != TicTacToeLogic.eGameState.Draw)
             {
                 if(m_TicTacToeGame.Player1.Score > m_TicTacToeGame.Player2.Score)
                 {
@@ -126,8 +126,7 @@ namespace Ex05.GameInterface
         {
             TicTacToeButton buttonToUpdate = m_ButtonsBoard[i_Row, i_Col];
             buttonToUpdate.Text = i_PlayerSymbol.ToString();
-            buttonToUpdate.BackColor = i_PlayerSymbol == (char)GameLogic.TicTacToe.ePlayerSign.One 
-                                                     ? k_Player1Color : k_Player2Color;
+            buttonToUpdate.BackColor = i_PlayerSymbol == (char)TicTacToe.ePlayerSign.One ? k_Player1Color : k_Player2Color;
         }
 
         private void clearGameBoard()
@@ -142,28 +141,28 @@ namespace Ex05.GameInterface
             }
 
             // Change the bold text back to player1 to prepare for next round
-            Player1Name.Font = new Font(Player1Name.Font, FontStyle.Bold);
-            Player1Score.Font = new Font(Player1Score.Font, FontStyle.Bold);
-            Player2Name.Font = new Font(Player2Name.Font, FontStyle.Regular);
-            Player2Score.Font = new Font(Player2Score.Font, FontStyle.Regular);
+            player1Name.Font = new Font(player1Name.Font, FontStyle.Bold);
+            player1Score.Font = new Font(player1Score.Font, FontStyle.Bold);
+            player2Name.Font = new Font(player2Name.Font, FontStyle.Regular);
+            player2Score.Font = new Font(player2Score.Font, FontStyle.Regular);
         }
 
         // Switches bold texts of players labels to reflect players' turn
         private void changeBoldText()
         {
-            if (Player1Name.Font.Bold)
+            if (player1Name.Font.Bold)
             {
-                Player2Name.Font = new Font(Player2Name.Font, FontStyle.Bold);
-                Player2Score.Font = new Font(Player2Score.Font, FontStyle.Bold);
-                Player1Name.Font = new Font(Player1Name.Font, FontStyle.Regular);
-                Player1Score.Font = new Font(Player1Score.Font, FontStyle.Regular);
+                player2Name.Font = new Font(player2Name.Font, FontStyle.Bold);
+                player2Score.Font = new Font(player2Score.Font, FontStyle.Bold);
+                player1Name.Font = new Font(player1Name.Font, FontStyle.Regular);
+                player1Score.Font = new Font(player1Score.Font, FontStyle.Regular);
             }
             else
             {
-                Player1Name.Font = new Font(Player1Name.Font, FontStyle.Bold);
-                Player1Score.Font = new Font(Player1Score.Font, FontStyle.Bold);
-                Player2Name.Font = new Font(Player2Name.Font, FontStyle.Regular);
-                Player2Score.Font = new Font(Player2Score.Font, FontStyle.Regular);
+                player1Name.Font = new Font(player1Name.Font, FontStyle.Bold);
+                player1Score.Font = new Font(player1Score.Font, FontStyle.Bold);
+                player2Name.Font = new Font(player2Name.Font, FontStyle.Regular);
+                player2Score.Font = new Font(player2Score.Font, FontStyle.Regular);
             }
         }
 
@@ -175,9 +174,9 @@ namespace Ex05.GameInterface
                 if(m_TicTacToeGame.GetMoveFromPlayer(new Point(button.Row + 1, button.Col + 1)))
                 {
                     updateGameBoard(button.Row, button.Col, m_TicTacToeGame.CurrentPlayer.Symbol);
-                    GameLogic.TicTacToeLogic.eGameState state = m_TicTacToeGame.GameState;
+                    TicTacToeLogic.eGameState state = m_TicTacToeGame.GameState;
 
-                    if (state == GameLogic.TicTacToeLogic.eGameState.Lose || state == GameLogic.TicTacToeLogic.eGameState.Draw)
+                    if (state == TicTacToeLogic.eGameState.Lose || state == TicTacToeLogic.eGameState.Draw)
                     {
                         m_TicTacToeGame.HandleGameOver();
                     }
@@ -193,11 +192,11 @@ namespace Ex05.GameInterface
             }
         }
 
-        private void makeAIMove(GameLogic.TicTacToeLogic.eGameState i_GameState)
+        private void makeAIMove(TicTacToeLogic.eGameState i_GameState)
         {
-            GameLogic.TicTacToeLogic.GetMoveFromAI(GameLogic.TicTacToe.ePlayerSign.Two, m_TicTacToeGame.GameBoard, ref i_GameState, out Point newMove);
+            TicTacToeLogic.GetMoveFromAI(TicTacToe.ePlayerSign.Two, m_TicTacToeGame.GameBoard, ref i_GameState, out Point newMove);
             updateGameBoard(newMove.X, newMove.Y, m_TicTacToeGame.CurrentPlayer.Symbol);
-            if (i_GameState == GameLogic.TicTacToeLogic.eGameState.Lose || i_GameState == GameLogic.TicTacToeLogic.eGameState.Draw)
+            if (i_GameState == TicTacToeLogic.eGameState.Lose || i_GameState == TicTacToeLogic.eGameState.Draw)
             {
                 m_TicTacToeGame.GameState = i_GameState;
                 m_TicTacToeGame.HandleGameOver();
