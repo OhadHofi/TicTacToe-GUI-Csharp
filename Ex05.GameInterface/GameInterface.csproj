@@ -95,9 +95,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ex05.GameLogic\Ex05.GameLogic.csproj">
+    <ProjectReference Include="..\Ex05.GameLogic\GameLogic.csproj">
       <Project>{1419cb8e-f9ff-4a36-8d34-fa4ad948cdb1}</Project>
-      <Name>Ex05.GameLogic</Name>
+      <Name>GameLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
