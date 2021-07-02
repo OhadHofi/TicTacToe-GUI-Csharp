@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "Ex05.GameLogic\GameLogic.csproj", "{1419CB8E-F9FF-4A36-8D34-FA4AD948CDB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "GameLogic\GameLogic.csproj", "{1419CB8E-F9FF-4A36-8D34-FA4AD948CDB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameInterface", "Ex05.GameInterface\GameInterface.csproj", "{74802D9E-635E-4B58-BA09-B5F568AE846E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameInterface", "GameInterface\GameInterface.csproj", "{74802D9E-635E-4B58-BA09-B5F568AE846E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
