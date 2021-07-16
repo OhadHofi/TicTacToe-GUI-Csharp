@@ -44,7 +44,7 @@ If the game mode is player vs AI, then the AI will make its move immediately aft
 When a sequence of matching squares is made, the player who made this sequence *loses* this round.
 
 
-After a round is over, a message will be displayed asked to continue the game:
+After a round is over, a message will be displayed asking to continue the game:
 
 ![Game4](images/game4.PNG)
 
