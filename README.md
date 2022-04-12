@@ -7,7 +7,7 @@
 
 Project made by:
  - Omer Moskowitz - <https://github.com/Mosko4>
- - Ohad Hodefi - <https://github.com/OhadHodefi>
+ - Ohad Hofi - <https://github.com/OhadHofi>
 
 ## Instructions
 Initial start of the game shows the settings form:
